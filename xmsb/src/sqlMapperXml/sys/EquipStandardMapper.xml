@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.sys.EquipStandardMapper" >
+  <resultMap id="BaseResultMap" type="com.cody.entity.sys.EquipStandard" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="county" property="county" jdbcType="INTEGER" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="leaf" property="leaf" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="institution_number" property="institutionNumber" jdbcType="INTEGER" />
+    <result column="person_number" property="personNumber" jdbcType="INTEGER" />
+    <result column="equipcrite" property="equipcrite" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="typecode" property="typecode" jdbcType="VARCHAR" />
+    <result column="countprovincetype" property="countprovincetype" jdbcType="VARCHAR" />
+    <result column="countcitytype" property="countcitytype" jdbcType="VARCHAR" />
+    <result column="countcountytype" property="countcountytype" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="BaseVoResultMap" type="com.cody.vo.sys.EquipStandardVo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="county" property="county" jdbcType="INTEGER" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="leaf" property="leaf" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="institution_number" property="institutionNumber" jdbcType="INTEGER" />
+    <result column="person_number" property="personNumber" jdbcType="INTEGER" />
+    <result column="equipcrite" property="equipcrite" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="typecode" property="typecode" jdbcType="VARCHAR" />
+    <result column="counttype" property="counttype" jdbcType="VARCHAR" />
+    <result column="countprovincetype" property="countprovincetype" jdbcType="VARCHAR" />
+    <result column="countcitytype" property="countcitytype" jdbcType="VARCHAR" />
+    <result column="countcountytype" property="countcountytype" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="typevalue" property="typevalue" jdbcType="VARCHAR" />
+    <result column="standarnum" property="standarnum" jdbcType="INTEGER" />
+    <result column="standartypeid" property="standartypeid" jdbcType="VARCHAR" />
+    <result column="standartypename" property="standartypename" jdbcType="VARCHAR" />
+    <result column="countprovincevalue" property="countprovincevalue" jdbcType="VARCHAR" />
+    <result column="countcityvalue" property="countcityvalue" jdbcType="VARCHAR" />
+    <result column="countcountyvalue" property="countcountyvalue" jdbcType="VARCHAR" />
+    <result column="unitvalue" property="unitvalue" jdbcType="VARCHAR" />
+    <result column="equipcritevalue" property="equipcritevalue" jdbcType="VARCHAR" />
+    <result column="eqid" property="eqid" jdbcType="VARCHAR" />
+    <result column="equipnum" property="equipnum" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, name, province, city, county, unit, leaf, price, parent_id, institution_number, 
+    person_number, equipcrite,createtime,typecode,status
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_equipstandard
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_sys_equipstandard
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteByPrimaryKeys" parameterType="java.lang.String">
+  	delete from t_sys_equipstandard 
+  	<where>
+  		<foreach collection="array" item="item" separator="or">
+			id =  #{item}
+    	</foreach>
+  	</where>
+  </delete>
+  
+  <insert id="insert" parameterType="com.cody.entity.sys.EquipStandard" >
+    insert into t_sys_equipstandard (id, name, province, 
+      city, county, unit, 
+      leaf, price, parent_id, 
+      institution_number, person_number, equipcrite,createtime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{province,jdbcType=INTEGER}, 
+      #{city,jdbcType=INTEGER}, #{county,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
+      #{leaf,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, #{parentId,jdbcType=INTEGER}, 
+      #{institutionNumber,jdbcType=INTEGER}, #{personNumber,jdbcType=INTEGER}, 
+      #{equipcrite,jdbcType=VARCHAR},#{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.cody.entity.sys.EquipStandard" >
+    insert into t_sys_equipstandard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="leaf != null" >
+        leaf,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="institutionNumber != null" >
+        institution_number,
+      </if>
+      <if test="personNumber != null" >
+        person_number,
+      </if>
+      <if test="equipcrite != null" >
+        equipcrite,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="typecode != null" >
+        typecode,
+      </if>
+      <if test="countprovincetype != null" >
+        countprovincetype,
+      </if>
+      <if test="countcitytype != null" >
+        countcitytype,
+      </if>
+      <if test="countcountytype != null" >
+        countcountytype,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="leaf != null" >
+        #{leaf,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="institutionNumber != null" >
+        #{institutionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        #{personNumber,jdbcType=INTEGER},
+      </if>
+      <if test="equipcrite != null" >
+        #{equipcrite,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typecode != null" >
+        #{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="countprovincetype != null" >
+        #{countprovincetype,jdbcType=VARCHAR},
+      </if>
+      <if test="countcitytype != null" >
+        #{countcitytype,jdbcType=VARCHAR},
+      </if>
+      <if test="countcountytype != null" >
+        #{countcountytype,jdbcType=VARCHAR},
+      </if>
+       <if test="status != null" >
+        #{status},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.sys.EquipStandard" >
+    update t_sys_equipstandard
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="leaf != null" >
+        leaf = #{leaf,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="institutionNumber != null" >
+        institution_number = #{institutionNumber,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        person_number = #{personNumber,jdbcType=INTEGER},
+      </if>
+      <if test="equipcrite != null" >
+        equipcrite = #{equipcrite,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime=#{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typecode != null" >
+        typecode=#{typecode,jdbcType=VARCHAR},
+      </if>
+      <if test="countprovincetype!= null" >
+        countprovincetype=#{countprovincetype,jdbcType=VARCHAR},
+      </if>
+      <if test="countcitytype!= null" >
+        countcitytype=#{countcitytype,jdbcType=VARCHAR},
+      </if>
+      <if test="countcountytype !=null" >
+        countcountytype=#{countcountytype,jdbcType=VARCHAR},
+      </if>
+      <if test="status !=null" >
+        status=#{status},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.sys.EquipStandard" >
+    update t_sys_equipstandard
+    set name = #{name,jdbcType=VARCHAR},
+      province = #{province,jdbcType=INTEGER},
+      city = #{city,jdbcType=INTEGER},
+      county = #{county,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      leaf = #{leaf,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      institution_number = #{institutionNumber,jdbcType=INTEGER},
+      person_number = #{personNumber,jdbcType=INTEGER},
+      equipcrite = #{equipcrite,jdbcType=VARCHAR},
+      createtime=#{createtime,jdbcType=TIMESTAMP}
+   	  where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  	<select id="findPageCountByCondition" resultType="java.lang.Integer" parameterType="PageInfo">
+		select count(*) count 
+		from t_sys_equipstandard
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+       		and status>-1
+		</where>
+	</select>
+  
+	<select id="findPageByCondition" resultMap="BaseVoResultMap" parameterType="PageInfo">
+	    SELECT t.id, name, province, city, county, typecode,countprovincetype,countcitytype,
+	    countcountytype,unit, leaf, price, parent_id, institution_number,status,
+		person_number, equipcrite,t.createtime,i1.itemvalue as typevalue ,i2.itemvalue as unitvalue, 
+		i3.itemvalue as equipcritevalue,i4.itemvalue as countprovincevalue,i5.itemvalue as countcityvalue,
+		i6.itemvalue as  countcountyvalue
+		from  t_sys_equipstandard  t 
+		LEFT JOIN item i1 on  i1.id = t.typecode
+		LEFT JOIN item i2 ON  i2.id = t.unit
+		LEFT JOIN item i3 ON  i3.id = t.equipcrite
+		LEFT JOIN item i4 ON  i4.id = t.countprovincetype
+		LEFT JOIN item i5 ON  i5.id = t.countcitytype
+		LEFT JOIN item i6 ON  i6.id = t.countcountytype
+	   	<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+       		and status>-1
+		</where>
+	    ORDER BY ${sort} ${order}
+	    LIMIT #{from}, #{size}
+	</select>
+
+   <!-- 注意把t_equip_child表的id返回，前台好判断是编辑还是保存 -->
+	<select id="findEquipChild" resultMap="BaseVoResultMap" parameterType="java.lang.String">
+	    SELECT  tse.id,tse.name,${unitType} as standarnum,tec.equipnum as equipnum,tec.eqstandardid,it.itemvalue as standartypename,it1.itemvalue as unit,it2.itemvalue as equipcrite,
+	    it.id as standartypeid,tec.id as eqid
+	   	FROM  t_sys_equipstandard 
+	   	as tse left join t_equip_child 
+	   	as tec on tse.id= tec.eqstandardid left join item 
+	   	as it on it.id=${standartypeid}
+	   	left join item
+	   	as it1 on it1.id=tse.unit
+	   	left join item
+	   	as it2 on it2.id=tse.equipcrite
+	   	<where>
+	         typecode = #{typecode,jdbcType=VARCHAR}
+	         
+	         <if test="eqbaseId != null and eqbaseId !=''"  >
+	            and tec.eqbaseid = #{eqbaseId,jdbcType=VARCHAR}
+	         </if>
+	         
+	         <if test="selectStatus != null and selectStatus !=''"  >
+	            and tec.equipnum > 0
+	         </if>
+	         
+	   	</where> 
+	</select>
+	
+	<select id="findEquipChildNew" resultMap="BaseVoResultMap" parameterType="java.lang.String">
+	    SELECT  tse.id,tse.name,${unitType} as standarnum,it.itemvalue as standartypename,it1.itemvalue as unit,it2.itemvalue as equipcrite,
+	    it.id as standartypeid
+	   	FROM  t_sys_equipstandard 
+	   	as tse left join item 
+	   	as it on it.id=${standartypeid}
+	   	left join item
+	   	as it1 on it1.id=tse.unit
+	   	left join item
+	   	as it2 on it2.id=tse.equipcrite
+	   	<where>
+		   	  <if test="typecode != null" >
+	            typecode = #{typecode,jdbcType=VARCHAR}
+	         </if>
+	   	</where>
+	</select>
+	
+	<!-- <select id="findStandardCondition" resultType="BaseResultMap" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select 
+		<include refid="Base_Column_List" />
+		from  ${tablename}
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	</select> -->
+	
+</mapper>

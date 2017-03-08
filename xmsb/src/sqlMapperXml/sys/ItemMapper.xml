@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.sys.ItemMapper">
+	<resultMap id="BaseResultMap" type="com.cody.entity.sys.Item">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="dictionary_id" property="dictionaryId"
+			jdbcType="VARCHAR" />
+		<result column="itemcode" property="itemcode" jdbcType="VARCHAR" />
+		<result column="itemvalue" property="itemvalue" jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="dictionarycode" property="dictionarycode"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, dictionary_id, itemcode, itemvalue,createtime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from item
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from item
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<delete id="deleteByPrimaryKeys" parameterType="java.lang.String">
+	  	delete from item 
+	  	<where>
+	  		<foreach collection="array" item="item" separator="or">
+				id =  #{item}
+	    	</foreach>
+	  	</where>
+ 	 </delete>
+  
+	<insert id="insert" parameterType="com.cody.entity.sys.Item">
+		insert into item (id, dictionary_id, itemcode,
+		itemvalue)
+		values (#{id,jdbcType=VARCHAR}, #{dictionaryId,jdbcType=VARCHAR},
+		#{itemcode,jdbcType=VARCHAR},
+		#{itemvalue,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.cody.entity.sys.Item">
+		insert into item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="dictionaryId != null">
+				dictionary_id,
+			</if>
+			<if test="itemcode != null">
+				itemcode,
+			</if>
+			<if test="itemvalue != null">
+				itemvalue,
+			</if>
+			<if test="createtime != null">
+				createtime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="dictionaryId != null">
+				#{dictionaryId,jdbcType=VARCHAR},
+			</if>
+			<if test="itemcode != null">
+				#{itemcode,jdbcType=VARCHAR},
+			</if>
+			<if test="itemvalue != null">
+				#{itemvalue,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.sys.Item">
+		update item
+		<set>
+			<if test="dictionaryId != null">
+				dictionary_id = #{dictionaryId,jdbcType=VARCHAR},
+			</if>
+			<if test="itemcode != null">
+				itemcode = #{itemcode,jdbcType=VARCHAR},
+			</if>
+			<if test="itemvalue != null">
+				itemvalue = #{itemvalue,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.cody.entity.sys.Item">
+		update item
+		set dictionary_id = #{dictionaryId,jdbcType=VARCHAR},
+		itemcode = #{itemcode,jdbcType=VARCHAR},
+		itemvalue = #{itemvalue,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="findByDictionarycode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from item where dictionary_id =
+		(SELECT id from dictionary where dictionarycode =#{dictionarycode})
+	</select>
+
+	<select id="findToGradetype" resultMap="BaseResultMap">
+		select * from item where dictionary_id =
+		(SELECT id from dictionary where dictionarycode ='DWLB' and itemvalue!='大专院校'
+		and itemvalue!='企业')
+	</select>
+
+	<select id="findPageCountByCondition" resultType="java.lang.Integer"
+		parameterType="PageInfo">
+		select count(*) count
+		from item
+		<where>
+			<foreach collection="condition" item="item" index="key"
+				separator="and">
+				${key} #{item}
+			</foreach>
+		</where>
+	</select>
+
+	<select id="findPageByCondition" resultMap="BaseResultMap"
+		parameterType="PageInfo">
+		SELECT id,dictionary_id,itemcode,itemvalue,createtime
+		FROM item
+		<where>
+			<foreach collection="condition" item="item" index="key"
+				separator="and">
+				${key} #{item}
+			</foreach>
+		</where>
+		ORDER BY ${sort} ${order}
+		LIMIT #{from}, #{size}
+	</select>
+
+	<select id="findByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from item
+		where itemcode = #{itemcode,jdbcType=VARCHAR}
+	</select>
+</mapper>

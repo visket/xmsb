@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.storage.StoragePersonMapper" >
+  <resultMap id="BaseResultMap" type="com.cody.entity.storage.StoragePerson" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="storage_id" property="storageId" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="major_id" property="majorId" jdbcType="VARCHAR" />
+    <result column="post_id" property="postId" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="tellphone" property="tellphone" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, storage_id, type_id, name, major_id, post_id, unit, tellphone, createtime, creator_id, 
+    lastupdatetime, updator_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_storage_person
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_storage_person
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cody.entity.storage.StoragePerson" >
+    insert into t_storage_person (id, storage_id, type_id, 
+      name, major_id, post_id, 
+      unit, tellphone, createtime, 
+      creator_id, lastupdatetime, updator_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{storageId,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{majorId,jdbcType=VARCHAR}, #{postId,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{tellphone,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{creatorId,jdbcType=BIGINT}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{updatorId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cody.entity.storage.StoragePerson" >
+    insert into t_storage_person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storageId != null" >
+        storage_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="majorId != null" >
+        major_id,
+      </if>
+      <if test="postId != null" >
+        post_id,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="tellphone != null" >
+        tellphone,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime,
+      </if>
+      <if test="updatorId != null" >
+        updator_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="storageId != null" >
+        #{storageId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="majorId != null" >
+        #{majorId,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        #{postId,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="tellphone != null" >
+        #{tellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        #{updatorId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.storage.StoragePerson" >
+    update t_storage_person
+    <set >
+      <if test="storageId != null" >
+        storage_id = #{storageId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="majorId != null" >
+        major_id = #{majorId,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        post_id = #{postId,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="tellphone != null" >
+        tellphone = #{tellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        updator_id = #{updatorId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.storage.StoragePerson" >
+    update t_storage_person
+    set storage_id = #{storageId,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      major_id = #{majorId,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      tellphone = #{tellphone,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      updator_id = #{updatorId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
