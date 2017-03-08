@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.hiddanger.HiddangerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cody.entity.hiddanger.HiddangerInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="hiddanger_id" property="hiddangerId" jdbcType="VARCHAR" />
+    <result column="screegovern" property="screegovern" jdbcType="VARCHAR" />
+    <result column="screegovernName" property="screegovernName" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
+    <result column="gradeName" property="gradeName" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hiddanger_id, screegovern, grade, quantity
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_hiddanger_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_hiddanger_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cody.entity.hiddanger.HiddangerInfo" >
+    insert into t_hiddanger_info (id, hiddanger_id, screegovern, 
+      grade, quantity)
+    values (#{id,jdbcType=VARCHAR}, #{hiddangerId,jdbcType=VARCHAR}, #{screegovern,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cody.entity.hiddanger.HiddangerInfo" >
+    insert into t_hiddanger_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hiddangerId != null" >
+        hiddanger_id,
+      </if>
+      <if test="screegovern != null" >
+        screegovern,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="hiddangerId != null" >
+        #{hiddangerId,jdbcType=VARCHAR},
+      </if>
+      <if test="screegovern != null" >
+        #{screegovern,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.hiddanger.HiddangerInfo" >
+    update t_hiddanger_info
+    <set >
+      <if test="hiddangerId != null" >
+        hiddanger_id = #{hiddangerId,jdbcType=VARCHAR},
+      </if>
+      <if test="screegovern != null" >
+        screegovern = #{screegovern,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.hiddanger.HiddangerInfo" >
+    update t_hiddanger_info
+    set hiddanger_id = #{hiddangerId,jdbcType=VARCHAR},
+      screegovern = #{screegovern,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+    <!-- 不通过key map来设置通过 condition设置-->
+  <select id="findPageCountByCondition" resultType="java.lang.Integer" parameterType="PageInfo">
+		select count(*) count 
+		from  t_hiddanger_info hi
+		left join item im on im.id=hi.grade
+		left join item im1 on im1.id=hi.screegovern
+		where hi.hiddanger_id = #{condition.hiddanger_id=,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findPageByCondition" resultMap="BaseResultMap" parameterType="PageInfo">
+	    select hi.id,hi.hiddanger_id,hi.screegovern,hi.grade,hi.quantity,
+	    hi.createtime,hi.lastupdatetime,im.itemvalue as gradeName,
+	    im1.itemvalue as screegovernName
+		from  t_hiddanger_info hi 
+		left join item im on im.id=hi.grade
+		left join item im1 on im1.id=hi.screegovern
+		where hi.hiddanger_id = #{condition.hiddanger_id=,jdbcType=VARCHAR}
+  </select>
+  
+   <delete id="deleteByHiddangerId" parameterType="java.lang.String" >
+    delete from t_hiddanger_info
+    where hiddanger_id = #{hiddangerId,jdbcType=VARCHAR}
+   </delete>
+  
+</mapper>

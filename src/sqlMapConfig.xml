@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+
+<configuration>
+    <!-- 进行mybatis 配置 -->
+    <typeAliases>
+        <!-- 为类型 起了别名 -->
+        <typeAlias type="com.cody.common.utils.PageInfo" alias="PageInfo"/>
+        <typeAlias type="com.cody.common.utils.TreeInfo" alias="TreeInfo"/>
+        <typeAlias type="com.cody.common.utils.object.ValidInfo" alias="ValidInfo"/>
+    </typeAliases>
+</configuration> 

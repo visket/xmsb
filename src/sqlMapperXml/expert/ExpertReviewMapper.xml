@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.expert.ExpertReviewMapper" >
+  
+    <resultMap id="AuditVOResultMap" type="com.cody.vo.project.ProjectAuditVO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="classes_id" property="classesId" jdbcType="VARCHAR" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="principaltor_id" property="principaltorId" jdbcType="BIGINT" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="reviewStatus" property="reviewstatus" jdbcType="VARCHAR" />
+    <result column="reviewContent" property="reviewcontent" jdbcType="VARCHAR" />
+    <result column="reviewScore" property="reviewscore" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="typename" property="typename" jdbcType="VARCHAR" />
+    <result column="classifyname" property="classifyname" jdbcType="VARCHAR" />
+    <result column="classesname" property="classesname" jdbcType="VARCHAR" />
+    <result column="statusname" property="statusname" jdbcType="VARCHAR" />
+    <result column="unitname" property="unitname" jdbcType="VARCHAR" />
+    <result column="processname" property="processname" jdbcType="VARCHAR" />
+    <result column="creatorname" property="creatorname" jdbcType="VARCHAR" />
+    <result column="updatorname" property="updatorname" jdbcType="VARCHAR" />
+    <result column="principaltorname" property="principaltorname" jdbcType="VARCHAR" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+    <result column="projectTypeId" property="projectTypeId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <sql id="Base_Column_List" >
+    id, number, process_id, log_id, name, startTime, endTime, type_id, classify_id, classes_id, 
+    status_id, unit_id, createTime, creator_id, lastUpdateTime, updator_id, principaltor_id, 
+    cost, reviewStatus, reviewContent, reviewScore, area_id
+   </sql>
+   
+   	<!-- 通用数据统计 -->
+	<select id="findPageCountByCondition" resultType="java.lang.Integer" parameterType="PageInfo">
+		SELECT  
+	    count(*) count
+		from t_approve_log log 
+		inner join t_science_base p on log.business_id = p.id
+		inner join t_approve_process pro on log.process_id = pro.id
+		inner join t_approve_step step on log.step_id = step.id
+		left join t_sys_unit unit1 on unit1.id = log.stepUnit_id <!-- 审批单位 -->
+		left join t_sys_unit unit2 on unit2.id = p.unit_id  <!-- 申报单位 -->
+		left join user u1 on u1.id = log.stepUser_id <!-- 审批人 -->
+		left join user u2 on u2.id = p.applicant <!-- 申报人 -->
+		left join user u3 on u3.id = log.approvetor_id <!-- 实际审批人 -->
+		left join sysarea area on area.id = p.area_id <!-- 区域 -->
+		left join item item1 on item1.id = p.status_id <!-- 项目状态 -->
+		left join item item2 on item2.id = log.status_id <!-- 操作日志状态 -->
+		left join item item3 on item3.id = log.reviewstatus_id 
+		left join item item4 on item4.id = p.reviewStatus_id <!-- 最后审核状态 -->
+		<where>
+		    log.datasign = '1'
+			and log.status_id = 'f381bea9-71be-4d3f-997d-54529e7b1b4a'
+			and (unit1.id = #{user.unitId} 
+				or u1.id = #{user.id}
+				or u3.id = #{user.id}
+			) and 1=1
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+       		
+       		<!-- <foreach collection="conditionKey" item="item" index="index" separator="and">
+				${item}  #{conditionValue[${index}]}
+       		</foreach> -->
+       		
+		</where>
+	</select>
+  
+	<!-- 通用分页查询 -->
+	<select id="findPageByCondition" resultMap="AuditVOResultMap" parameterType="PageInfo">
+	   SELECT  p.id as projectId, p.applycode projectNumber, p.applyname projectName,p.type_id projectTypeId, 
+		p.reviewCotent projectReviewContent,p.log_id projectLastLogId, p.applytime projectDeclareTime,
+	    pro.id processId, pro.number processNumber, pro.name processName, 
+	    step.id stepId, step.stepnumber stepNumber, step.parentstepnumber stepParentNumber, 
+	    step.stepname stepName,
+	    log.id logId, log.createtime logCreatetime, log.lastupdatetime logLastupdatetime,
+	    log.stepNumber logStepNumber, log.logNumber longNumber,
+	    log.starttime logStarttime, log.endtime logEndtime,
+	    log.reviewscore_id logReviewcore, log.reviewcontent logReviewcontent, 
+	    area.id areaId, area.name areaName, 
+	    u1.id approverId, u1.name approverName,<!-- 审批人 -->
+	    u2.id declarerId, u2.name declarerName,<!-- 申报人 -->
+	    u3.id actualApproverId, u3.name actualApproverName,<!-- 实际审批人 -->
+	    unit1.id approveUnitId, unit1.name approveUnitName,<!-- 审批单位 -->
+	    unit2.id declareUnitId, unit2.name declareUnitName, <!-- 申报单位 -->
+	    item1.id projectStatusId, item1.itemvalue projectStatusName, <!-- 项目状态 -->
+	    item2.id logStatusId, item2.itemvalue logStatusName, <!-- 操作日志状态 -->
+	    item3.id logReviewstatusId, item3.itemvalue logReviewstatus,
+	    item4.id projectReviewStatus, item4.itemvalue projectReviewStatusName
+		from t_approve_log log 
+		inner join t_science_base p on log.business_id = p.id
+		inner join t_approve_process pro on log.process_id = pro.id
+		inner join t_approve_step step on log.step_id = step.id
+		left join t_sys_unit unit1 on unit1.id = log.stepUnit_id <!-- 审批单位 -->
+		left join t_sys_unit unit2 on unit2.id = p.unit_id  <!-- 申报单位 -->
+		left join user u1 on u1.id = log.stepUser_id <!-- 审批人 -->
+		left join user u2 on u2.id = p.applicant <!-- 申报人 -->
+		left join user u3 on u3.id = log.approvetor_id <!-- 实际审批人 -->
+		left join sysarea area on area.id = p.area_id <!-- 区域 -->
+		left join item item1 on item1.id = p.status_id <!-- 项目状态 -->
+		left join item item2 on item2.id = log.status_id <!-- 操作日志状态 -->
+		left join item item3 on item3.id = log.reviewstatus_id 
+		left join item item4 on item4.id = p.reviewStatus_id <!-- 最后审核状态 -->	   	
+	   	<where>
+	   	    log.datasign = '1'
+			and log.status_id = 'f381bea9-71be-4d3f-997d-54529e7b1b4a'
+			and (unit1.id = #{user.unitId} 
+				or u1.id = #{user.id}
+				or u3.id = #{user.id}
+			) and 1=1
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	    ORDER BY ${sort} ${order}
+	    LIMIT #{from}, #{size}
+	</select>
+  	
+</mapper>

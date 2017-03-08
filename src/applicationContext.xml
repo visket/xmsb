@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 扫描service、dao -->
+	<context:component-scan base-package="com.cody">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- PropertyPlaceholderConfigurer,用于spring ${placeholder}的解析 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="properties" ref="applicationProperties" />
+	</bean>
+
+	<!-- 配置文件 -->
+	<bean id="applicationProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- <value>
+					file:/codyser/ajj/config/ajj-common-config.properties
+				</value>
+				<value>
+					file:/codyser/ajj/config/ajj-admin-config.properties
+				</value> -->
+				<value>
+					classpath*:db-config.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 数据库配置 -->
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc_driverUrl}" />
+		<property name="username" value="${jdbc_username}" />
+		<property name="password" value="${jdbc_password}" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="100" />
+		<property name="minIdle" value="10" />
+		<property name="maxWait" value="60000" />
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="1800" />
+		<property name="logAbandoned" value="true" />
+		<property name="filters" value="mergeStat" />
+	</bean>
+
+	<!-- spring整合mybatis （mybatis-spring项目提供整合类） -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations" value="classpath:/sqlMapperXml/*/*Mapper.xml" />
+		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置, 多个以逗号或者分号隔开 -->
+		<property name="typeAliasesPackage" value="com.cody.entity" />
+		<property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
+	</bean>
+
+	<!-- MyBatis 动态实现 -->
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 对Dao 接口动态实现，需要知道接口在哪 -->
+		<property name="basePackage" value="com.cody.mapper" />
+	</bean>
+
+
+    
+
+	<!-- 线程池 需要时启用-->
+	<!-- <bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="${task.core_pool_size}" />
+		<property name="maxPoolSize" value="${task.max_pool_size}" />
+		<property name="queueCapacity" value="${task.queue_capacity}" />
+		<property name="keepAliveSeconds" value="${task.keep_alive_seconds}" />
+	</bean> -->
+	
+	<!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

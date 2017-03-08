@@ -1,0 +1,3 @@
+[{'id':'(log.status_id = '61a3bdf5-73f9-4285-b8c0-6bca56d0da6d' or log.status_id = '2239265d-bea4-4f81-b0f3-4cb7366e5558')','itemvalue':'待处理'},
+{'id':'(log.status_id <> '61a3bdf5-73f9-4285-b8c0-6bca56d0da6d' and log.status_id <> '2239265d-bea4-4f81-b0f3-4cb7366e5558')','itemvalue':'已处理'}
+]

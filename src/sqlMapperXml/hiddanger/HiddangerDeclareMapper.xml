@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.hiddanger.HiddangerDeclareMapper" >
+  <resultMap id="BaseResultMap" type="com.cody.entity.hiddanger.HiddangerDeclare" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="applyname" property="applyname" jdbcType="VARCHAR" />
+    <result column="applycode" property="applycode" jdbcType="VARCHAR" />
+    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+    <result column="projectcontacts" property="projectcontacts" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="applytime" property="applytime" jdbcType="TIMESTAMP" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="applicant" property="applicant" jdbcType="BIGINT" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="reviewstatus_id" property="reviewstatusId" jdbcType="VARCHAR" />
+    <result column="reviewcontent" property="reviewcontent" jdbcType="VARCHAR" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="delstatus" property="delstatus" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="VoResultMap" type="com.cody.vo.hiddanger.HiddangerDeclareVo" extends="BaseResultMap">
+    <result column="statusName" property="statusName" jdbcType="VARCHAR" />
+    <result column="areaName" property="areaName" jdbcType="VARCHAR" />
+    <result column="unitName" property="unitName" jdbcType="VARCHAR" />
+    <result column="applicantName" property="applicantName" jdbcType="VARCHAR" />
+    <result column="gradeTypeId" property="gradeTypeId" jdbcType="VARCHAR" />
+    <result column="gradeTypeName" property="gradeTypeName" jdbcType="VARCHAR" />
+    <result column="reviewstatusName" property="reviewstatusName" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="reviewstatus_id" property="reviewstatusId" jdbcType="VARCHAR" />
+    <result column="reviewcontent" property="reviewcontent" jdbcType="VARCHAR" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="delstatus" property="delstatus" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="com.cody.entity.hiddanger.HiddangerDeclare" extends="BaseResultMap" >
+    <result column="worksummary" property="worksummary" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, applyname, applycode, unit_id, projectcontacts, phone, applytime, createtime, 
+    lastupdatetime, applicant, type_id, status_id, process_id, log_id, reviewstatus_id, 
+    reviewcontent, classify_id, area_id, creator_id, updator_id, starttime, endtime, 
+    delstatus
+  </sql>
+
+  <sql id="Blob_Column_List" >
+    worksummary
+  </sql>
+
+  <select id="selectByPrimaryKeyVo" resultMap="VoResultMap" parameterType="java.lang.String" >
+    select b.id, b.applytime, b.applicant, b.applyname, b.unit_id, b.applycode, 
+    	b.status_id, b.reviewstatus_id, b.reviewcontent,  
+    	b.process_id, b.log_id, b.classify_id, b.creator_id, b.area_id, 
+    	b.createtime, b.lastUpdateTime, b.updator_id, b.starttime, b.endtime,
+    	b.projectcontacts, b.phone, b.worksummary,
+
+	    item1.itemvalue as statusName,
+	    u.name as applicantName,
+	    unit.name as unitName,
+	    item2.itemvalue as reviewstatusName,
+	    item3.id gradeTypeId, item3.itemvalue gradeTypeName 
+	
+		FROM  t_hiddanger_declare b 
+		left join item item1 on item1.id = b.status_id
+	 	left join user u on u.id = b.applicant
+	 	left join t_sys_unit unit on unit.id = b.unit_id
+	 	left join item item2 on item2.id = b.reviewstatus_id
+	 	left join item item3 on item3.id = unit.gradetype
+	    where b.id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+
+  <!-- 标准修改器    -->
+  <update id="updateByCustoms" parameterType="com.cody.common.core.CustomDatabaseHandle">
+  	update ${tablename} 
+  	<set><!-- status_id = 'XMZT_SBZ' -->
+  		<foreach collection="updates" item="item" index="key" separator=",">
+			${key}  #{item}
+       	</foreach>
+  	</set>
+  	<where>
+  		<foreach collection="condition" item="item" index="index" separator="and" >
+			${index}  #{item}
+       	</foreach>
+  	</where>
+  </update>
+  
+	<!-- 标准count查询    -->
+	<select id="findStandardCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count 
+		from  ${tablename}
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	</select>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_hiddanger_declare
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_hiddanger_declare
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cody.entity.hiddanger.HiddangerDeclare" >
+    insert into t_hiddanger_declare (id, applyname, applycode, 
+      unit_id, projectcontacts, phone, 
+      applytime, createtime, lastupdatetime, 
+      applicant, type_id, status_id, 
+      process_id, log_id, reviewstatus_id, 
+      reviewcontent, classify_id, area_id, 
+      creator_id, updator_id, starttime, 
+      endtime, delstatus, worksummary
+      )
+    values (#{id,jdbcType=VARCHAR}, #{applyname,jdbcType=VARCHAR}, #{applycode,jdbcType=VARCHAR}, 
+      #{unitId,jdbcType=VARCHAR}, #{projectcontacts,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{applytime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{lastupdatetime,jdbcType=TIMESTAMP}, 
+      #{applicant,jdbcType=BIGINT}, #{typeId,jdbcType=VARCHAR}, #{statusId,jdbcType=VARCHAR}, 
+      #{processId,jdbcType=VARCHAR}, #{logId,jdbcType=VARCHAR}, #{reviewstatusId,jdbcType=VARCHAR}, 
+      #{reviewcontent,jdbcType=VARCHAR}, #{classifyId,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, 
+      #{creatorId,jdbcType=BIGINT}, #{updatorId,jdbcType=BIGINT}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{delstatus,jdbcType=INTEGER}, #{worksummary,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.cody.entity.hiddanger.HiddangerDeclare" >
+    insert into t_hiddanger_declare
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applyname != null" >
+        applyname,
+      </if>
+      <if test="applycode != null" >
+        applycode,
+      </if>
+      <if test="unitId != null" >
+        unit_id,
+      </if>
+      <if test="projectcontacts != null" >
+        projectcontacts,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="applytime != null" >
+        applytime,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="processId != null" >
+        process_id,
+      </if>
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="reviewstatusId != null" >
+        reviewstatus_id,
+      </if>
+      <if test="reviewcontent != null" >
+        reviewcontent,
+      </if>
+      <if test="classifyId != null" >
+        classify_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="updatorId != null" >
+        updator_id,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="delstatus != null" >
+        delstatus,
+      </if>
+      <if test="worksummary != null" >
+        worksummary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="applyname != null" >
+        #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applycode != null" >
+        #{applycode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcontacts != null" >
+        #{projectcontacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatusId != null" >
+        #{reviewstatusId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcontent != null" >
+        #{reviewcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null" >
+        #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="updatorId != null" >
+        #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delstatus != null" >
+        #{delstatus,jdbcType=INTEGER},
+      </if>
+      <if test="worksummary != null" >
+        #{worksummary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.hiddanger.HiddangerDeclare" >
+    update t_hiddanger_declare
+    <set >
+      <if test="applyname != null" >
+        applyname = #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applycode != null" >
+        applycode = #{applycode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitId != null" >
+        unit_id = #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcontacts != null" >
+        projectcontacts = #{projectcontacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        applytime = #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="logId != null" >
+        log_id = #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatusId != null" >
+        reviewstatus_id = #{reviewstatusId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcontent != null" >
+        reviewcontent = #{reviewcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null" >
+        classify_id = #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="updatorId != null" >
+        updator_id = #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delstatus != null" >
+        delstatus = #{delstatus,jdbcType=INTEGER},
+      </if>
+      <if test="worksummary != null" >
+        worksummary = #{worksummary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cody.entity.hiddanger.HiddangerDeclare" >
+    update t_hiddanger_declare
+    set applyname = #{applyname,jdbcType=VARCHAR},
+      applycode = #{applycode,jdbcType=VARCHAR},
+      unit_id = #{unitId,jdbcType=VARCHAR},
+      projectcontacts = #{projectcontacts,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      applytime = #{applytime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      applicant = #{applicant,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      status_id = #{statusId,jdbcType=VARCHAR},
+      process_id = #{processId,jdbcType=VARCHAR},
+      log_id = #{logId,jdbcType=VARCHAR},
+      reviewstatus_id = #{reviewstatusId,jdbcType=VARCHAR},
+      reviewcontent = #{reviewcontent,jdbcType=VARCHAR},
+      classify_id = #{classifyId,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      updator_id = #{updatorId,jdbcType=BIGINT},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      delstatus = #{delstatus,jdbcType=INTEGER},
+      worksummary = #{worksummary,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update> 
+  
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.hiddanger.HiddangerDeclare" >
+    update t_hiddanger_declare
+    set applyname = #{applyname,jdbcType=VARCHAR},
+      applycode = #{applycode,jdbcType=VARCHAR},
+      unit_id = #{unitId,jdbcType=VARCHAR},
+      projectcontacts = #{projectcontacts,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      applytime = #{applytime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      applicant = #{applicant,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      status_id = #{statusId,jdbcType=VARCHAR},
+      process_id = #{processId,jdbcType=VARCHAR},
+      log_id = #{logId,jdbcType=VARCHAR},
+      reviewstatus_id = #{reviewstatusId,jdbcType=VARCHAR},
+      reviewcontent = #{reviewcontent,jdbcType=VARCHAR},
+      classify_id = #{classifyId,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      updator_id = #{updatorId,jdbcType=BIGINT},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      delstatus = #{delstatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+    <!-- count统计 -->
+	<select id="findPageCountByCondition" resultType="java.lang.Integer" parameterType="PageInfo">
+		select count(*) count 
+		from  t_hiddanger_declare hd 
+	   	left join user u on u.id = hd.unit_id
+	   	left join item im1 on im1.id=hd.status_id
+	   	left join item im2 on im2.id=hd.reviewstatus_id
+	   	left join t_sys_unit unit on unit.id = hd.unit_id
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	</select>
+  
+ 	<!-- 通用查询 -->
+	<select id="findPageByCondition" resultMap="VoResultMap" parameterType="PageInfo">
+	    SELECT hd.id,hd.applyname,hd.applycode,hd.projectcontacts,hd.phone,
+    	unit.name as unitName, hd.applytime, hd.process_id, hd.log_id,hd.status_id,
+    	unit.id unitId, unit.name unitName,
+	    u.name as applicantName,hd.applytime,hd.worksummary,im1.itemvalue statusName,im2.itemvalue reviewstatusName
+	   	FROM  t_hiddanger_declare hd
+	   	left join user u on u.id = hd.unit_id
+	   	left join item im1 on im1.id=hd.status_id
+	   	left join item im2 on im2.id=hd.reviewstatus_id
+	   	left join t_sys_unit unit on unit.id = hd.unit_id
+	   	<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	    ORDER BY ${sort} ${order}
+	    LIMIT #{from}, #{size}
+	</select>
+	
+	<select id="findLastData" resultMap="BaseResultMap" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select * from t_hiddanger_declare  order by createtime desc limit 1;
+	</select>
+  
+</mapper>

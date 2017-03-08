@@ -1,0 +1,150 @@
+package com.cody.entity.sys;
+
+import java.io.Serializable;
+import java.util.Date;
+import com.alibaba.fastjson.annotation.JSONField;
+
+/**
+ * @description：资源
+ * @author：wanhuan
+ * @date：2016/11/18
+ */
+public class Resource implements Serializable,Comparable<Resource> {
+
+    private static final long serialVersionUID = -5321613594382537470L;
+
+    private Long id;
+    
+    private String pids;
+
+    private String name;
+
+    private String url;
+
+    private String description;
+
+    @JSONField(name="iconCls")
+    private String icon;
+
+    private Long pid;
+
+    private Integer seq;
+
+    private Integer status;
+
+    private Integer resourcetype;
+
+    private Date createdate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getResourcetype() {
+        return resourcetype;
+    }
+
+    public void setResourcetype(Integer resourcetype) {
+        this.resourcetype = resourcetype;
+    }
+
+    public Date getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
+    }
+
+    public String getPids() {
+		return pids;
+	}
+
+	public void setPids(String pids) {
+		this.pids = pids;
+	}
+
+	
+	
+	@Override
+	public int compareTo(Resource o) {
+		return this.seq.compareTo(o.seq);
+	}
+
+	@Override
+    public String toString() {
+        return "Resource{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                ", pid=" + pid +
+                ", pids=" + pids +
+                ", seq=" + seq +
+                ", status=" + status +
+                ", resourcetype=" + resourcetype +
+                ", createdate=" + createdate +
+                '}';
+    }
+}

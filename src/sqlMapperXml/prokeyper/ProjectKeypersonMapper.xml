@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.prokeyper.ProjectKeypersonMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cody.entity.prokeyper.ProjectKeyperson" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="science_id" property="scienceId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="officialcapacity" property="officialcapacity" jdbcType="VARCHAR" />
+    <result column="professbusiness" property="professbusiness" jdbcType="VARCHAR" />
+    <result column="percentile" property="percentile" jdbcType="VARCHAR" />
+    <result column="sharetask" property="sharetask" jdbcType="VARCHAR" />
+    <result column="belongunit" property="belongunit" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, science_id, name, officialcapacity, professbusiness, percentile, sharetask, belongunit
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_keyperson
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_project_keyperson
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+   <delete id="deleteByScienceBaseId" parameterType="java.lang.String" >
+    delete from t_project_keyperson
+    where science_id = #{scienceId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cody.entity.prokeyper.ProjectKeyperson" >
+    insert into t_project_keyperson (id, science_id, name, 
+      officialcapacity, professbusiness, percentile, 
+      sharetask, belongunit)
+    values (#{id,jdbcType=VARCHAR}, #{scienceId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{officialcapacity,jdbcType=VARCHAR}, #{professbusiness,jdbcType=VARCHAR}, #{percentile,jdbcType=VARCHAR}, 
+      #{sharetask,jdbcType=VARCHAR}, #{belongunit,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.cody.entity.prokeyper.ProjectKeyperson" >
+    insert into t_project_keyperson
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scienceId != null" >
+        science_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="officialcapacity != null" >
+        officialcapacity,
+      </if>
+      <if test="professbusiness != null" >
+        professbusiness,
+      </if>
+      <if test="percentile != null" >
+        percentile,
+      </if>
+      <if test="sharetask != null" >
+        sharetask,
+      </if>
+      <if test="belongunit != null" >
+        belongunit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="scienceId != null" >
+        #{scienceId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="officialcapacity != null" >
+        #{officialcapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="professbusiness != null" >
+        #{professbusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="percentile != null" >
+        #{percentile,jdbcType=VARCHAR},
+      </if>
+      <if test="sharetask != null" >
+        #{sharetask,jdbcType=VARCHAR},
+      </if>
+      <if test="belongunit != null" >
+        #{belongunit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.prokeyper.ProjectKeyperson" >
+    update t_project_keyperson
+    <set >
+      <if test="scienceId != null" >
+        science_id = #{scienceId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="officialcapacity != null" >
+        officialcapacity = #{officialcapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="professbusiness != null" >
+        professbusiness = #{professbusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="percentile != null" >
+        percentile = #{percentile,jdbcType=VARCHAR},
+      </if>
+      <if test="sharetask != null" >
+        sharetask = #{sharetask,jdbcType=VARCHAR},
+      </if>
+      <if test="belongunit != null" >
+        belongunit = #{belongunit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.prokeyper.ProjectKeyperson" >
+    update t_project_keyperson
+    set science_id = #{scienceId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      officialcapacity = #{officialcapacity,jdbcType=VARCHAR},
+      professbusiness = #{professbusiness,jdbcType=VARCHAR},
+      percentile = #{percentile,jdbcType=VARCHAR},
+      sharetask = #{sharetask,jdbcType=VARCHAR},
+      belongunit = #{belongunit,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 不通过key map来设置通过 condition设置-->
+  <select id="findPageCountByCondition" resultType="java.lang.Integer" parameterType="PageInfo">
+		select count(*) count 
+		from  t_project_keyperson 
+		where science_id = #{condition.science_id=,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findPageByCondition" resultMap="BaseResultMap" parameterType="PageInfo">
+	    select *
+		from  t_project_keyperson where science_id = #{condition.science_id=,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>
