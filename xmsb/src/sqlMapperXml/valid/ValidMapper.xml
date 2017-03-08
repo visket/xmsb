@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.valid.ValidMapper" >
+
+	<select id="findCountByCondition" resultType="java.lang.Integer" parameterType="ValidInfo">
+	  	select count(*) 
+	   	FROM  ${tablename}
+	   	<where>
+			id &lt;&gt; #{id, jdbcType=VARCHAR}
+			and ${field} = #{value}
+			<if test="statusField != null and statusField != ''">
+				and ${statusField} &lt;&gt; -1
+			</if>
+		</where>
+	</select>
+
+
+	<!-- 所有查询指定结果集的数据数量，主要用作验证 -->
+	<select id="findBaseCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		SELECT count(*) 
+		FROM  ${tablename}
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	</select>
+	
+	
+
+
+</mapper>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.approve.ApproveProcessMapper" >
+  <resultMap id="BaseResultMap" type="com.cody.entity.approve.ApproveProcess" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="lastupdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="datasign_id" property="datasignId" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, number, name, project_id, creator_id, createTime, updator_id, lastupdateTime, 
+    datasign_id, description, starttime, endtime, status_id
+  </sql>
+  
+  
+  
+  <!-- 标准count查询   where to_days(createtime) = to_days(now());  -->
+	<select id="findToDayDataCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count 
+		from  ${tablename}
+		where to_days(createtime) = to_days(now()) 
+		<!-- <foreach collection="condition" item="item" index="key" open="and" separator="and">
+			${key}  #{item}
+       	</foreach> -->
+	</select>
+  
+    <!-- 标准count查询   where to_days(createtime) = to_days(now());  -->
+	<select id="findToMonthDataCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count 
+		from ${tablename}
+		where date_format(createtime, '%Y%m') = date_format(curdate(), '%Y%m') 
+	</select>
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_approve_process
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_approve_process
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cody.entity.approve.ApproveProcess" >
+    insert into t_approve_process (id, number, name, 
+      project_id, creator_id, createTime, 
+      updator_id, lastupdateTime, datasign_id, 
+      description, starttime, endtime, 
+      status_id)
+    values (#{id,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=VARCHAR}, #{creatorId,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatorId,jdbcType=BIGINT}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{datasignId,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{statusId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cody.entity.approve.ApproveProcess" >
+    insert into t_approve_process
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatorId != null" >
+        updator_id,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdateTime,
+      </if>
+      <if test="datasignId != null" >
+        datasign_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datasignId != null" >
+        #{datasignId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.approve.ApproveProcess" >
+    update t_approve_process
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        updator_id = #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datasignId != null" >
+        datasign_id = #{datasignId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.approve.ApproveProcess" >
+    update t_approve_process
+    set number = #{number,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updator_id = #{updatorId,jdbcType=BIGINT},
+      lastupdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      datasign_id = #{datasignId,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      status_id = #{statusId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

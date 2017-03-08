@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.project.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.cody.entity.project.Project" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="classes_id" property="classesId" jdbcType="VARCHAR" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="principaltor_id" property="principaltorId" jdbcType="BIGINT" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="reviewStatus" property="reviewstatus" jdbcType="VARCHAR" />
+    <result column="reviewContent" property="reviewcontent" jdbcType="VARCHAR" />
+    <result column="reviewScore" property="reviewscore" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="VOResultMap" type="com.cody.vo.project.ProjectVO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="classes_id" property="classesId" jdbcType="VARCHAR" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="principaltor_id" property="principaltorId" jdbcType="BIGINT" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="reviewStatus" property="reviewstatus" jdbcType="VARCHAR" />
+    <result column="reviewContent" property="reviewcontent" jdbcType="VARCHAR" />
+    <result column="reviewScore" property="reviewscore" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="typename" property="typename" jdbcType="VARCHAR" />
+    <result column="classifyname" property="classifyname" jdbcType="VARCHAR" />
+    <result column="classesname" property="classesname" jdbcType="VARCHAR" />
+    <result column="statusname" property="statusname" jdbcType="VARCHAR" />
+    <result column="unitname" property="unitname" jdbcType="VARCHAR" />
+    <result column="processname" property="processname" jdbcType="VARCHAR" />
+    <result column="creatorname" property="creatorname" jdbcType="VARCHAR" />
+    <result column="updatorname" property="updatorname" jdbcType="VARCHAR" />
+    <result column="principaltorname" property="principaltorname" jdbcType="VARCHAR" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <resultMap id="AuditVOResultMap" type="com.cody.vo.project.ProjectAuditVO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="classes_id" property="classesId" jdbcType="VARCHAR" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="principaltor_id" property="principaltorId" jdbcType="BIGINT" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="reviewStatus" property="reviewstatus" jdbcType="VARCHAR" />
+    <result column="reviewContent" property="reviewcontent" jdbcType="VARCHAR" />
+    <result column="reviewScore" property="reviewscore" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="typename" property="typename" jdbcType="VARCHAR" />
+    <result column="classifyname" property="classifyname" jdbcType="VARCHAR" />
+    <result column="classesname" property="classesname" jdbcType="VARCHAR" />
+    <result column="statusname" property="statusname" jdbcType="VARCHAR" />
+    <result column="unitname" property="unitname" jdbcType="VARCHAR" />
+    <result column="processname" property="processname" jdbcType="VARCHAR" />
+    <result column="creatorname" property="creatorname" jdbcType="VARCHAR" />
+    <result column="updatorname" property="updatorname" jdbcType="VARCHAR" />
+    <result column="principaltorname" property="principaltorname" jdbcType="VARCHAR" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, number, process_id, log_id, name, startTime, endTime, type_id, classify_id, classes_id, 
+    status_id, unit_id, createTime, creator_id, lastUpdateTime, updator_id, principaltor_id, 
+    cost, reviewStatus, reviewContent, reviewScore, area_id
+  </sql>
+  
+  
+  
+	<!-- 通用数据统计 -->
+	<select id="findPageCountByCondition" resultType="java.lang.Integer" parameterType="PageInfo">
+		select count(*) count 
+		from t_project_base
+
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+       		
+       		<!-- <foreach collection="conditionKey" item="item" index="index" separator="and">
+				${item}  #{conditionValue[${index}]}
+       		</foreach> -->
+       		
+		</where>
+	</select>
+  
+	<!-- 通用分页查询 -->
+	<select id="findPageByCondition" resultMap="VOResultMap" parameterType="PageInfo">
+	    SELECT  p.id, number, process_id, p.name, startTime, endTime, p.type_id, p.classify_id, p.classes_id, 
+	   			status_id, p.unit_id, p.createTime, p.creator_id, p.lastUpdateTime, p.updator_id, principaltor_id, 
+	   			cost, REVIEWSTATUS, REVIEWCONTENT, REVIEWSCORE, area_id,
+	   			u1.name creatorname, u2.name updatorname, u3.name principaltorname, area.name areaname,
+	   			unit.name unitname,
+	   			d1.itemvalue typename, d2.itemvalue classifyname, d3.itemvalue classesname, d4.itemvalue statusname 
+	   	FROM  t_project_base p
+	   	left join item d1 on d1.id = p.type_id 
+	   	left join item d2 on d2.id = p.classify_id 
+	   	left join item d3 on d3.id = p.classes_id 
+	   	left join item d4 on d4.id = p.status_id 
+	   	left join user u1 on u1.id = p.creator_id
+	   	left join user u2 on u2.id = p.updator_id
+	   	left join user u3 on u3.id = p.principaltor_id
+	   	left join sysarea area on area.id = p.area_id
+	   	left join t_sys_unit unit on unit.id = p.unit_id
+	   	
+	   	<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+       		<!-- <foreach collection="conditionKey" item="item" index="index" separator="and">
+				${item}  #{conditionValue[${index}]}
+       		</foreach> -->
+		</where>
+	   	
+	    ORDER BY ${sort} ${order}
+	    LIMIT #{from}, #{size}
+	</select>
+
+  
+  <!-- 标准修改器    -->
+  <update id="updateByCustoms" parameterType="com.cody.common.core.CustomDatabaseHandle">
+  	update t_project_base 
+  	<set><!-- status_id = 'XMZT_SBZ' -->
+  		<foreach collection="updates" item="item" index="key" separator=",">
+			${key}  #{item}
+       	</foreach>
+  	</set>
+  	<where>
+  		<foreach collection="condition" item="item" index="index" separator="and" >
+			${index}  #{item}
+       	</foreach>
+  	</where>
+  </update>
+  
+	<!-- 标准count查询    -->
+	<select id="findStandardCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count 
+		from  ${tablename}
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	</select>
+  
+	<!-- 标准count查询   where to_days(createtime) = to_days(now());  -->
+	<select id="findToDayDataCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count 
+		from  t_project_base
+		where to_days(createtime) = to_days(now())
+	</select>
+  
+  <!-- 标准count查询   where to_days(createtime) = to_days(now());  -->
+	<select id="findToMonthDataCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count 
+		from  t_project_base 
+		where date_format(createtime, '%Y%m') = date_format(curdate(), '%Y%m') 
+	</select>
+  
+  
+  
+  <delete id="deleteByPrimaryKeys" parameterType="java.lang.String">
+  	delete from t_project_base 
+  	<where>
+  		<foreach collection="array" item="item" separator="or">
+			id =  #{item}
+    	</foreach>
+  	</where>
+  </delete>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_project_base
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_project_base
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cody.entity.project.Project" >
+    insert into t_project_base (id, number, process_id, 
+      log_id, name, startTime, 
+      endTime, type_id, classify_id, 
+      classes_id, status_id, unit_id, 
+      createTime, creator_id, lastUpdateTime, 
+      updator_id, principaltor_id, cost, 
+      reviewStatus, reviewContent, reviewScore, 
+      area_id)
+    values (#{id,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, 
+      #{logId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{typeId,jdbcType=VARCHAR}, #{classifyId,jdbcType=VARCHAR}, 
+      #{classesId,jdbcType=VARCHAR}, #{statusId,jdbcType=VARCHAR}, #{unitId,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=BIGINT}, #{lastupdatetime,jdbcType=TIMESTAMP}, 
+      #{updatorId,jdbcType=BIGINT}, #{principaltorId,jdbcType=BIGINT}, #{cost,jdbcType=DECIMAL}, 
+      #{reviewstatus,jdbcType=VARCHAR}, #{reviewcontent,jdbcType=VARCHAR}, #{reviewscore,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cody.entity.project.Project" >
+    insert into t_project_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="processId != null" >
+        process_id,
+      </if>
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="starttime != null and starttime != ''" >
+        startTime,
+      </if>
+      <if test="endtime != null and endtime != ''" >
+        endTime,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="classifyId != null" >
+        classify_id,
+      </if>
+      <if test="classesId != null" >
+        classes_id,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="unitId != null" >
+        unit_id,
+      </if>
+      <if test="createtime != null and createtime != ''" >
+        createTime,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="lastupdatetime != null and lastupdatetime != ''" >
+        lastUpdateTime,
+      </if>
+      <if test="updatorId != null" >
+        updator_id,
+      </if>
+      <if test="principaltorId != null" >
+        principaltor_id,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="reviewstatus != null" >
+        reviewStatus,
+      </if>
+      <if test="reviewcontent != null" >
+        reviewContent,
+      </if>
+      <if test="reviewscore != null" >
+        reviewScore,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null and starttime != ''" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null and endtime != ''" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null" >
+        #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="classesId != null" >
+        #{classesId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null and createtime != ''" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null and lastupdatetime != ''" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="principaltorId != null" >
+        #{principaltorId,jdbcType=BIGINT},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewstatus != null" >
+        #{reviewstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcontent != null" >
+        #{reviewcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewscore != null" >
+        #{reviewscore,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.project.Project" >
+    update t_project_base
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="logId != null" >
+        log_id = #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null and starttime != ''" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null and endtime != ''" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null" >
+        classify_id = #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="classesId != null" >
+        classes_id = #{classesId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="unitId != null" >
+        unit_id = #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null and createtime != ''" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null and lastupdatetime != ''" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        updator_id = #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="principaltorId != null" >
+        principaltor_id = #{principaltorId,jdbcType=BIGINT},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewstatus != null" >
+        reviewStatus = #{reviewstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcontent != null" >
+        reviewContent = #{reviewcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewscore != null" >
+        reviewScore = #{reviewscore,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.project.Project" >
+    update t_project_base
+    set number = #{number,jdbcType=VARCHAR},
+      process_id = #{processId,jdbcType=VARCHAR},
+      log_id = #{logId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      classify_id = #{classifyId,jdbcType=VARCHAR},
+      classes_id = #{classesId,jdbcType=VARCHAR},
+      status_id = #{statusId,jdbcType=VARCHAR},
+      unit_id = #{unitId,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      updator_id = #{updatorId,jdbcType=BIGINT},
+      principaltor_id = #{principaltorId,jdbcType=BIGINT},
+      cost = #{cost,jdbcType=DECIMAL},
+      reviewStatus = #{reviewstatus,jdbcType=VARCHAR},
+      reviewContent = #{reviewcontent,jdbcType=VARCHAR},
+      reviewScore = #{reviewscore,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

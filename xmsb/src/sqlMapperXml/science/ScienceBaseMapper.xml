@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cody.mapper.science.ScienceBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.cody.entity.science.ScienceBase" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="applycode" property="applycode" jdbcType="VARCHAR" />
+    <result column="applyname" property="applyname" jdbcType="VARCHAR" />
+    <result column="applytime" property="applytime" jdbcType="TIMESTAMP" />
+    <result column="applicant" property="applicant" jdbcType="BIGINT" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+    <result column="reviewstatus_id" property="reviewstatusId" jdbcType="VARCHAR" />
+    <result column="reviewcotent" property="reviewcotent" jdbcType="VARCHAR" />
+    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+    <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="delstatus" property="delstatus" jdbcType="INTEGER" />
+    <result column="projectname" property="projectname" jdbcType="VARCHAR" />
+    <result column="projectcode" property="projectcode" jdbcType="VARCHAR" />
+    <result column="projectcontacts" property="projectcontacts" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="filltime" property="filltime" jdbcType="TIMESTAMP" />
+    <result column="projecttype" property="projecttype" jdbcType="TINYINT" />
+    <result column="bearunit" property="bearunit" jdbcType="VARCHAR" />
+    <result column="partunit" property="partunit" jdbcType="VARCHAR" />
+    <result column="personcharge" property="personcharge" jdbcType="VARCHAR" />
+    
+    <result column="primarycoverage" property="primarycoverage" jdbcType="LONGVARCHAR" />
+    <result column="workbase" property="workbase" jdbcType="LONGVARCHAR" />
+    <result column="pilotdemonstration" property="pilotdemonstration" jdbcType="LONGVARCHAR" />
+    <result column="conditionaladvantage" property="conditionaladvantage" jdbcType="LONGVARCHAR" />
+    <result column="assessmentindex" property="assessmentindex" jdbcType="LONGVARCHAR" />
+    <result column="benefitanalysis" property="benefitanalysis" jdbcType="LONGVARCHAR" />
+    <result column="budget" property="budget" jdbcType="LONGVARCHAR" />
+    <result column="projectimplement" property="projectimplement" jdbcType="LONGVARCHAR" />
+  </resultMap>
+ <!--  <resultMap id="ResultMapWithBLOBs" type="com.cody.mapper.science.ScienceBaseWithBLOBs" extends="BaseResultMap" >
+    <result column="primarycoverage" property="primarycoverage" jdbcType="LONGVARCHAR" />
+    <result column="workbase" property="workbase" jdbcType="LONGVARCHAR" />
+    <result column="pilotdemonstration" property="pilotdemonstration" jdbcType="LONGVARCHAR" />
+    <result column="conditionaladvantage" property="conditionaladvantage" jdbcType="LONGVARCHAR" />
+    <result column="assessmentindex" property="assessmentindex" jdbcType="LONGVARCHAR" />
+    <result column="benefitanalysis" property="benefitanalysis" jdbcType="LONGVARCHAR" />
+    <result column="budget" property="budget" jdbcType="LONGVARCHAR" />
+    <result column="projectimplement" property="projectimplement" jdbcType="LONGVARCHAR" />
+  </resultMap> -->
+  
+	<resultMap id="VoResultMap" type="com.cody.vo.science.ScienceBaseVo" >
+	  	<id column="id" property="id" jdbcType="VARCHAR" />
+	    <result column="applycode" property="applycode" jdbcType="VARCHAR" />
+	    <result column="applyname" property="applyname" jdbcType="VARCHAR" />
+	    <result column="applytime" property="applytime" jdbcType="TIMESTAMP" />
+	    <result column="applicant" property="applicant" jdbcType="BIGINT" />
+	    <result column="status_id" property="statusId" jdbcType="VARCHAR" />
+	    <result column="unit_id" property="unitId" jdbcType="VARCHAR" />
+	    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+	    <result column="log_id" property="logId" jdbcType="VARCHAR" />
+	    <result column="reviewstatus_id" property="reviewstatusId" jdbcType="VARCHAR" />
+	    <result column="reviewcotent" property="reviewcotent" jdbcType="VARCHAR" />
+	    <result column="classify_id" property="classifyId" jdbcType="VARCHAR" />
+	    <result column="creator_id" property="creatorId" jdbcType="BIGINT" />
+	    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+	    <result column="createtimeinc" property="createtimeinc" jdbcType="TIMESTAMP" />
+	    <result column="updator_id" property="updatorId" jdbcType="BIGINT" />
+	    <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+	    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+	    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+	    <result column="delstatus" property="delstatus" jdbcType="INTEGER" />
+	    <result column="gradeTypeId" property="gradeTypeId" jdbcType="VARCHAR" />
+	    <result column="gradeTypeName" property="gradeTypeName" jdbcType="VARCHAR" />
+	    <result column="areaId" property="areaId" jdbcType="VARCHAR" />
+	    <result column="areaName" property="areaName" jdbcType="VARCHAR" />
+	    <result column="statusName" property="statusName" jdbcType="VARCHAR" />
+	    <result column="applicantName" property="applicantName" jdbcType="VARCHAR" />
+	    <result column="unitName" property="unitName" jdbcType="VARCHAR" />
+	    <result column="reviewstatusName" property="reviewstatusName" jdbcType="VARCHAR" />
+	    <result column="projectname" property="projectname" jdbcType="VARCHAR" />
+		<result column="projectcode" property="projectcode" jdbcType="VARCHAR" />
+		<result column="projectcontacts" property="projectcontacts" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="filltime" property="filltime" jdbcType="TIMESTAMP" />
+		<result column="projecttype" property="projecttype" jdbcType="TINYINT" />
+		
+		<result column="primarycoverage" property="primarycoverage" jdbcType="LONGVARCHAR" />
+		<result column="workbase" property="workbase" jdbcType="LONGVARCHAR" />
+		<result column="pilotdemonstration" property="pilotdemonstration" jdbcType="LONGVARCHAR" />
+		<result column="conditionaladvantage" property="conditionaladvantage" jdbcType="LONGVARCHAR" />
+		<result column="assessmentindex" property="assessmentindex" jdbcType="LONGVARCHAR" />
+		<result column="benefitanalysis" property="benefitanalysis" jdbcType="LONGVARCHAR" />
+		<result column="budget" property="budget" jdbcType="LONGVARCHAR" />
+		<result column="projectimplement" property="projectimplement" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	
+	<resultMap id="AuditVOResultMap" type="com.cody.vo.project.ProjectAuditVO" >
+	  	<id column="logId" property="logId" jdbcType="VARCHAR" />
+	    <result column="projectId" property="projectId" jdbcType="VARCHAR" />
+	    <result column="projectNumber" property="projectNumber" jdbcType="VARCHAR" />
+	    <result column="projectName" property="projectName" jdbcType="VARCHAR" />
+	    <result column="projectLastLogId" property="projectLastLogId" jdbcType="VARCHAR" />
+	    <result column="projectTypeId" property="projectTypeId" jdbcType="VARCHAR" />
+	    <result column="projectReviewStatus" property="projectReviewStatus" jdbcType="VARCHAR" />
+	    <result column="projectReviewStatusName" property="projectReviewStatusName" jdbcType="VARCHAR" />
+	    <result column="projectReviewScore" property="projectReviewScore" jdbcType="VARCHAR" />
+	    <result column="projectReviewContent" property="projectReviewContent" jdbcType="VARCHAR" />
+	    <result column="projectDeclareTime" property="projectDeclareTime" jdbcType="TIMESTAMP" />
+	    <result column="projectStatusId" property="projectStatusId" jdbcType="VARCHAR" />
+	    <result column="projectStatusName" property="projectStatusName" jdbcType="VARCHAR" />
+	    <result column="projectClassifyId" property="projectClassifyId" jdbcType="VARCHAR" />
+	    <result column="projectClassifyName" property="projectClassifyName" jdbcType="VARCHAR" />
+	    <result column="projectContacts" property="projectContacts" jdbcType="VARCHAR" />
+	    <result column="projectPhone" property="projectPhone" jdbcType="VARCHAR" />
+	    
+	    <result column="processId" property="processId" jdbcType="VARCHAR" />
+	    <result column="processNumber" property="processNumber" jdbcType="VARCHAR" />
+	    <result column="processName" property="processName" jdbcType="VARCHAR" />
+	    <result column="stepId" property="stepId" jdbcType="VARCHAR" />
+	    <result column="stepName" property="stepName" jdbcType="VARCHAR" />
+	    <result column="stepNumber" property="stepNumber" jdbcType="INTEGER" />
+	    <result column="stepParentNumber" property="stepParentNumber" jdbcType="INTEGER" />
+	    <result column="stepUserId" property="stepUserId" jdbcType="BIGINT" />
+	    <result column="stepRoleId" property="stepRoleId" jdbcType="BIGINT" />
+	    <result column="stepUnitId" property="stepUnitId" jdbcType="VARCHAR" />
+	    <result column="stepBackStatusId" property="stepBackStatusId" jdbcType="VARCHAR" />
+	    
+	    <result column="logStepNumber" property="logStepNumber" jdbcType="INTEGER" />
+	    <result column="logNumber" property="logNumber" jdbcType="INTEGER" />
+	    <result column="logCreatetime" property="logCreatetime" jdbcType="TIMESTAMP" />
+	    <result column="logLastupdatetime" property="logLastupdatetime" jdbcType="TIMESTAMP" />
+	    <result column="logStarttime" property="logStarttime" jdbcType="TIMESTAMP" />
+	    <result column="logEndtime" property="logEndtime" jdbcType="TIMESTAMP" />
+	    <result column="logReviewstatusId" property="logReviewstatusId" jdbcType="VARCHAR" />
+	    <result column="logReviewstatus" property="logReviewstatus" jdbcType="VARCHAR" />
+	    <result column="logReviewcore" property="logReviewcore" jdbcType="VARCHAR" />
+	    <result column="logReviewcontent" property="logReviewcontent" jdbcType="VARCHAR" />
+	    <result column="areaId" property="areaId" jdbcType="VARCHAR" />
+	    <result column="areaName" property="areaName" jdbcType="VARCHAR" />
+	    <result column="approverId" property="approverId" jdbcType="BIGINT" />
+	    <result column="approverName" property="approverName" jdbcType="VARCHAR" />
+	    <result column="declarerId" property="declarerId" jdbcType="BIGINT" />
+	    <result column="declarerName" property="declarerName" jdbcType="VARCHAR" />
+	    <result column="actualApproverId" property="actualApproverId" jdbcType="BIGINT" />
+	    <result column="actualApproverName" property="actualApproverName" jdbcType="VARCHAR" />
+	    <result column="approveUnitId" property="approveUnitId" jdbcType="BIGINT" />
+	    <result column="approveUnitName" property="approveUnitName" jdbcType="VARCHAR" />
+	    <result column="approveUnitGradeId" property="approveUnitGradeId" jdbcType="VARCHAR" />
+	    <result column="approveUnitGradeName" property="approveUnitGradeName" jdbcType="VARCHAR" />
+	    <result column="declareUnitId" property="declareUnitId" jdbcType="VARCHAR" />
+	    <result column="declareUnitName" property="declareUnitName" jdbcType="VARCHAR" />
+	    <result column="logStatusId" property="logStatusId" jdbcType="VARCHAR" />
+	    <result column="logStatusName" property="logStatusName" jdbcType="VARCHAR" />
+	</resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, applycode, applyname, applytime, applicant, type_id, status_id, unit_id, process_id, 
+    log_id, reviewstatus_id, reviewcotent, classify_id, area_id, creator_id, createtime, 
+    updator_id, lastupdatetime, starttime, endtime, delstatus, projectname, projectcode, 
+    projectcontacts, phone, filltime, projecttype,primarycoverage, workbase, pilotdemonstration, 
+    conditionaladvantage, assessmentindex, benefitanalysis, budget, projectimplement
+  </sql>
+  
+  
+  
+   <!-- count统计 -->
+	<select id="findPageCountByCondition" resultType="java.lang.Integer" parameterType="PageInfo">
+		select count(*) count 
+		from  t_science_base b 
+	   	left join item item1 on item1.id = b.status_id
+	   	left join user u on u.id = b.applicant
+	   	left join t_sys_unit unit on unit.id = b.unit_id
+	   	left join item item2 on item2.id = b.reviewstatus_id
+	   	left join item item3 on item3.id = unit.gradetype
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+       		and delstatus > -1
+		</where>
+	</select>
+  
+ 	<!-- 通用查询 -->
+	<select id="findPageByCondition" resultMap="VoResultMap" parameterType="PageInfo">
+	    SELECT  b.id, b.applytime, b.applicant, b.applyname, b.unit_id, b.applycode, 
+    	b.status_id, b.reviewstatus_id, b.reviewcotent, b.process_id, 
+    	b.process_id,b.log_id, b.classify_id,b.primarycoverage,b.projecttype,b.workbase,b.pilotdemonstration,
+    	b.conditionaladvantage,b.benefitanalysis,b.bearunit,b.partunit,b.personcharge,
+    	b.assessmentindex,b.budget,b.projectimplement, 
+    	b.creator_id,b.createtime, b.updator_id,b.lastUpdateTime, b.starttime, b.endtime,
+    	unit.name as unitName,
+	    u.name as applicantName,
+	    unit.name as unitName,
+	    s.id as areaId, s.name as areaName,
+	    item1.itemvalue as statusName,
+	    item2.itemvalue as reviewstatusName, 
+	    item3.id gradeTypeId, item3.itemvalue gradeTypeName <!-- 级别 -->
+	    
+	   	FROM  t_science_base b
+	   	left join item item1 on item1.id = b.status_id
+	   	left join user u on u.id = b.applicant
+	   	left join t_sys_unit unit on unit.id = b.unit_id
+	   	left join sysarea s on s.id = unit.sysarea_id
+	   	left join item item2 on item2.id = b.reviewstatus_id
+	   	left join item item3 on item3.id = unit.gradetype <!-- 级别 typecode = #{typecode,jdbcType=VARCHAR}-->
+	   	<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+       		and delstatus > -1
+		</where>
+	    ORDER BY ${sort} ${order}
+	    LIMIT #{from}, #{size}
+	</select>
+  
+  <select id="findAuditDataCount" resultType="java.lang.Integer" parameterType="PageInfo">
+	    SELECT  count(*) 
+	    
+		from t_approve_log log 
+		inner join t_science_base p on log.business_id = p.id
+		inner join t_approve_process pro on log.process_id = pro.id
+		inner join t_approve_step step on log.step_id = step.id
+		left join t_sys_unit unit1 on unit1.id = log.stepUnit_id <!-- 审批单位 -->
+		left join t_sys_unit unit2 on unit2.id = p.unit_id  <!-- 申报单位 -->
+		left join user u1 on u1.id = log.stepUser_id <!-- 审批人 -->
+		left join user u2 on u2.id = p.applicant <!-- 申报人 -->
+		left join user u3 on u3.id = log.approvetor_id <!-- 实际审批人 -->
+		left join user_role ur1 on ur1.user_id = u1.id
+		left join user_role ur2 on ur2.user_id = u3.id
+		left join sysarea area on area.id = unit2.sysarea_id <!-- 区域 left join sysarea area on area.id = p.area_id  -->
+		left join item item1 on item1.id = p.status_id <!-- 项目状态 -->
+		left join item item2 on item2.id = log.status_id <!-- 操作日志状态 -->
+		left join item item3 on item3.id = log.reviewstatus_id 
+		left join item item4 on item4.id = p.reviewStatus_id <!-- 最后审核状态 -->
+		left join item item5 on item5.id = p.classify_id <!-- 项目分类 -->
+		where log.datasign = '1'
+		and log.status_id &lt;&gt; '468496a0-7692-4b3b-838f-612bd884f9d4'
+		and (unit1.id = #{user.unitId} 
+			OR u1.id = #{user.id}
+			or u3.id = #{user.id}
+			or log.steprole_id = #{user.roleId}
+		) 
+		<if test="q != null and q != ''" >
+        	and ${q}
+      	</if>
+		
+	   	and 
+		<foreach collection="condition" item="item" index="key" separator="and">
+			${key}  #{item}
+       	</foreach>
+	</select>
+  
+  <select id="findAuditData" resultMap="AuditVOResultMap" parameterType="PageInfo">
+	    SELECT  p.id as projectId, p.applycode projectNumber, p.applyname projectName, 
+		p.reviewCotent projectReviewContent,p.log_id projectLastLogId, p.applytime projectDeclareTime,
+		p.projectcontacts projectContacts, p.phone projectPhone, p.projecttype projectClassifyId, 
+	    pro.id processId, pro.number processNumber, pro.name processName, 
+	    step.id stepId, step.stepnumber stepNumber, step.parentstepnumber stepParentNumber, 
+	    step.stepname stepName, step.backStatus_id stepBackStatusId, 
+	    <!-- step.stepUser_id stepUserId, step.stepRole_id stepRoleId, step.stepUnit_id stepUnitId, -->
+	    log.id logId, log.createtime logCreatetime, log.lastupdatetime logLastupdatetime,
+	    log.stepNumber logStepNumber, log.logNumber logNumber,
+	    log.starttime logStarttime, log.endtime logEndtime,
+	    log.reviewscore_id logReviewcore, log.reviewcontent logReviewcontent, 
+	    area.id areaId, area.name areaName, 
+	    u1.id approverId, u1.name approverName,<!-- 审批人 -->
+	    u2.id declarerId, u2.name declarerName,<!-- 申报人 -->
+	    u3.id actualApproverId, u3.name actualApproverName,<!-- 实际审批人 -->
+	    unit1.id approveUnitId, unit1.name approveUnitName,<!-- 审批单位 -->
+	    unit2.id declareUnitId, unit2.name declareUnitName, <!-- 申报单位 -->
+	    item1.id projectStatusId, item1.itemvalue projectStatusName, <!-- 项目状态 -->
+	    item2.id logStatusId, item2.itemvalue logStatusName, <!-- 操作日志状态 -->
+	    item3.id logReviewstatusId, item3.itemvalue logReviewstatus,
+	    item4.id projectReviewStatus, item4.itemvalue projectReviewStatusName
+	    <!-- item5.id projectClassifyId, item5.itemvalue projectClassifyName 项目分类 -->
+	    
+		from t_approve_log log 
+		inner join t_science_base p on log.business_id = p.id
+		inner join t_approve_process pro on log.process_id = pro.id
+		inner join t_approve_step step on log.step_id = step.id
+		left join t_sys_unit unit1 on unit1.id = log.stepUnit_id <!-- 审批单位 -->
+		left join t_sys_unit unit2 on unit2.id = p.unit_id  <!-- 申报单位 -->
+		left join user u1 on u1.id = log.stepUser_id <!-- 审批人 -->
+		left join user u2 on u2.id = p.applicant <!-- 申报人 -->
+		left join user u3 on u3.id = log.approvetor_id <!-- 实际审批人 -->
+		left join user_role ur1 on ur1.user_id = u1.id
+		left join user_role ur2 on ur2.user_id = u3.id
+		left join sysarea area on area.id = unit2.sysarea_id <!-- 区域 left join sysarea area on area.id = p.area_id  -->
+		left join item item1 on item1.id = p.status_id <!-- 项目状态 -->
+		left join item item2 on item2.id = log.status_id <!-- 操作日志状态 -->
+		left join item item3 on item3.id = log.reviewstatus_id 
+		left join item item4 on item4.id = p.reviewStatus_id <!-- 最后审核状态 -->
+		left join item item5 on item5.id = p.classify_id <!-- 项目分类 -->
+		where log.datasign = '1'
+		and log.status_id &lt;&gt; '468496a0-7692-4b3b-838f-612bd884f9d4'
+		and (unit1.id = #{user.unitId} 
+			OR u1.id = #{user.id}
+			or u3.id = #{user.id}
+			or log.steprole_id = #{user.roleId}
+		) 
+		
+		<if test="q != null and q != ''" >
+        	and ${q}
+      	</if>
+		
+	   	and 
+		<foreach collection="condition" item="item" index="key" separator="and">
+			${key}  #{item}
+       	</foreach>
+
+	    ORDER BY ${sort} ${order}, log.logNumber desc 
+	    <!-- <if test="sort != null and sort != ''" >
+        	, ${sort} ${order}
+      	</if> -->
+	    LIMIT #{from}, #{size}
+	</select>
+  
+  
+  
+  
+	<select id="findAuditProcessLogData" resultMap="AuditVOResultMap" parameterType="PageInfo">
+  		SELECT  p.id as projectId, p.applycode projectNumber, p.applyname projectName, 
+	    p.reviewStatus_id projectReviewStatus, p.reviewCotent projectReviewContent, 
+	    p.log_id projectLastLogId, p.applytime projectDeclareTime,
+	    pro.id processId, pro.number processNumber, pro.name processName, 
+	    step.id stepId, step.stepnumber stepNumber, step.parentstepnumber stepParentNumber, 
+	    step.stepname stepName,
+  		log.id logId, log.createtime logCreatetime, log.lastupdatetime logLastupdatetime,
+		log.stepNumber logStepNumber, log.logNumber logNumber,
+		log.starttime logStarttime, log.endtime logEndtime,
+	    unit1.id approveUnitId, unit1.name approveUnitName,<!-- 审批单位 -->
+	    unit2.id declareUnitId, unit2.name declareUnitName, <!-- 申报单位 -->
+		unit3.id actualApproveUnitId, unit3.name actualApproveUnitName, <!-- 实际审批单位 -->
+		u3.id actualApproverId, u3.name actualApproverName,<!-- 实际审批人 -->
+		log.reviewStatus_id logReviewstatusId, log.reviewcontent logReviewcontent,
+		item3.id approveUnitGradeId, item3.itemvalue approveUnitGradeName, 
+		item2.id logStatusId,item2.itemvalue logStatusName
+		
+		from t_science_base p
+		inner join t_approve_log log on log.business_id = p.id
+		inner join t_approve_process pro on pro.id = log.process_id
+		inner join t_approve_step step on step.id = log.step_id
+		left join t_sys_unit unit1 on unit1.id = log.stepUnit_id  
+		left join t_sys_unit unit2 on unit2.id = p.unit_id  
+		left join user u1 on u1.id = log.stepUser_id  
+		left join user u2 on u2.id = p.applicant  
+		left join user u3 on u3.id = log.approvetor_id  
+		left join t_sys_unit unit3 on unit3.id = u3.unit_id <!-- 实际审批单位 -->
+		left join sysarea area on area.id = p.area_id  
+		left join item item1 on item1.id = p.status_id  
+		left join item item2 on item2.id = log.status_id  
+		left join item item3 on item3.id = unit1.gradetype
+		
+		where log.datasign = '1'
+		and p.id = #{q, jdbcType=VARCHAR}
+		order by log.logNumber desc
+	    LIMIT #{from}, #{size}
+  </select>
+  
+  
+  <select id="findAuditProcessLogDataCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+  		SELECT  count(*)
+		
+		from t_science_base p
+		inner join t_approve_log log on log.business_id = p.id
+		inner join t_approve_process pro on pro.id = log.process_id
+		inner join t_approve_step step on step.id = log.step_id
+		left join t_sys_unit unit1 on unit1.id = log.stepUnit_id  
+		left join t_sys_unit unit2 on unit2.id = p.unit_id  
+		left join user u1 on u1.id = log.stepUser_id  
+		left join user u2 on u2.id = p.applicant  
+		left join user u3 on u3.id = log.approvetor_id  
+		left join sysarea area on area.id = p.area_id  
+		left join item item1 on item1.id = p.status_id  
+		left join item item2 on item2.id = log.status_id  
+		left join item item3 on item3.id = unit1.gradetype
+		
+		where log.datasign = '1'
+		and p.id = #{projectId, jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="selectByPrimaryKeyByVo" resultMap="VoResultMap" parameterType="java.lang.String" >
+    select b.id, b.applytime, b.applicant, b.applyname, b.unit_id, b.applycode, 
+    	b.status_id, b.reviewstatus_id, b.reviewcotent,  
+    	b.process_id, b.log_id, b.classify_id, b.creator_id, b.area_id, 
+    	b.createtime, b.lastUpdateTime, b.updator_id, b.starttime, b.endtime,
+    	b.projectname, b.projectcode, b.projectcontacts, b.phone, b.filltime, 
+    	b.projecttype, b.primarycoverage, b.workbase, b.pilotdemonstration, 
+    	b.conditionaladvantage, b.assessmentindex, b.benefitanalysis, b.budget, b.projectimplement,
+	    item1.itemvalue as statusName,
+	    u.name as applicantName,
+	    unit.name as unitName,
+	    item2.itemvalue as reviewstatusName,
+	    item3.id gradeTypeId, item3.itemvalue gradeTypeName <!-- 级别 -->
+		FROM  t_science_base b 
+		left join item item1 on item1.id = b.status_id
+	 	left join user u on u.id = b.applicant
+	 	left join t_sys_unit unit on unit.id = b.unit_id
+	 	left join item item2 on item2.id = b.reviewstatus_id
+	 	left join item item3 on item3.id = unit.gradetype
+	    where b.id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  <!-- 标准修改器    -->
+  <update id="updateByCustoms" parameterType="com.cody.common.core.CustomDatabaseHandle">
+  	update ${tablename} 
+  	<set><!-- status_id = 'XMZT_SBZ' -->
+  		<foreach collection="updates" item="item" index="key" separator=",">
+			${key}  #{item}
+       	</foreach>
+  	</set>
+  	<where>
+  		<foreach collection="condition" item="item" index="index" separator="and" >
+			${index}  #{item}
+       	</foreach>
+  	</where>
+  </update>
+  
+	<!-- 标准count查询    -->
+	<select id="findStandardCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count 
+		from  ${tablename}
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	</select>
+  
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_science_base
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_science_base
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cody.entity.science.ScienceBase" >
+    insert into t_science_base (id, applycode, applyname, 
+      applytime, applicant, type_id, 
+      status_id, unit_id, process_id, 
+      log_id, reviewstatus_id, reviewcotent, 
+      classify_id, area_id, creator_id, 
+      createtime, updator_id, lastupdatetime, 
+      starttime, endtime, delstatus
+      )
+    values (#{id,jdbcType=VARCHAR}, #{applycode,jdbcType=VARCHAR}, #{applyname,jdbcType=VARCHAR}, 
+      #{applytime,jdbcType=TIMESTAMP}, #{applicant,jdbcType=BIGINT}, #{typeId,jdbcType=VARCHAR}, 
+      #{statusId,jdbcType=VARCHAR}, #{unitId,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, 
+      #{logId,jdbcType=VARCHAR}, #{reviewstatusId,jdbcType=VARCHAR}, #{reviewcotent,jdbcType=VARCHAR}, 
+      #{classifyId,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, #{creatorId,jdbcType=BIGINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatorId,jdbcType=BIGINT}, #{lastupdatetime,jdbcType=TIMESTAMP}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{delstatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cody.entity.science.ScienceBase" >
+    insert into t_science_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applycode != null" >
+        applycode,
+      </if>
+      <if test="applyname != null" >
+        applyname,
+      </if>
+      <if test="applytime != null" >
+        applytime,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="statusId != null" >
+        status_id,
+      </if>
+      <if test="unitId != null" >
+        unit_id,
+      </if>
+      <if test="processId != null" >
+        process_id,
+      </if>
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="reviewstatusId != null" >
+        reviewstatus_id,
+      </if>
+      <if test="reviewcotent != null" >
+        reviewcotent,
+      </if>
+      <if test="classifyId != null" >
+        classify_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatorId != null" >
+        updator_id,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="delstatus != null" >
+        delstatus,
+      </if>
+      <if test="projectname != null" >
+        projectname,
+      </if>
+      <if test="projectcode != null" >
+        projectcode,
+      </if>
+      <if test="projectcontacts != null" >
+        projectcontacts,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="filltime != null" >
+        filltime,
+      </if>
+      <if test="projecttype != null" >
+        projecttype,
+      </if>
+      <if test="primarycoverage != null" >
+        primarycoverage,
+      </if>
+      <if test="workbase != null" >
+        workbase,
+      </if>
+      <if test="pilotdemonstration != null" >
+        pilotdemonstration,
+      </if>
+      <if test="conditionaladvantage != null" >
+        conditionaladvantage,
+      </if>
+      <if test="assessmentindex != null" >
+        assessmentindex,
+      </if>
+      <if test="benefitanalysis != null" >
+        benefitanalysis,
+      </if>
+      <if test="budget != null" >
+        budget,
+      </if>
+      <if test="projectimplement != null" >
+        projectimplement,
+      </if>
+      <if test="bearunit != null" >
+        bearunit,
+      </if>
+      <if test="partunit != null" >
+        partunit,
+       </if>
+       <if test="personcharge != null" >
+        personcharge
+       </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="applycode != null" >
+        #{applycode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyname != null" >
+        #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null" >
+        #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatusId != null" >
+        #{reviewstatusId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcotent != null" >
+        #{reviewcotent,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null" >
+        #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delstatus != null" >
+        #{delstatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcode != null" >
+        #{projectcode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcontacts != null" >
+        #{projectcontacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="filltime != null" >
+        #{filltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projecttype != null" >
+        #{projecttype,jdbcType=TINYINT},
+      </if>
+      <if test="primarycoverage != null" >
+        #{primarycoverage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workbase != null" >
+        #{workbase,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pilotdemonstration != null" >
+        #{pilotdemonstration,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="conditionaladvantage != null" >
+        #{conditionaladvantage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="assessmentindex != null" >
+        #{assessmentindex,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="benefitanalysis != null" >
+        #{benefitanalysis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="budget != null" >
+        #{budget,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="projectimplement != null" >
+        #{projectimplement,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bearunit != null" >
+        #{bearunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partunit != null" >
+        #{partunit,jdbcType=VARCHAR},
+      </if>
+      <if test="personcharge != null" >
+        #{personcharge,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.cody.entity.science.ScienceBase" >
+   update t_science_base
+    <set >
+      <if test="applycode != null" >
+        applycode = #{applycode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyname != null" >
+        applyname = #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        applytime = #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null" >
+        status_id = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="unitId != null" >
+        unit_id = #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="logId != null" >
+        log_id = #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewstatusId != null" >
+        reviewstatus_id = #{reviewstatusId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewcotent != null" >
+        reviewcotent = #{reviewcotent,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyId != null" >
+        classify_id = #{classifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatorId != null" >
+        updator_id = #{updatorId,jdbcType=BIGINT},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delstatus != null" >
+        delstatus = #{delstatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectname != null" >
+        projectname = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcode != null" >
+        projectcode = #{projectcode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcontacts != null" >
+        projectcontacts = #{projectcontacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="filltime != null" >
+        filltime = #{filltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projecttype != null" >
+        projecttype = #{projecttype,jdbcType=TINYINT},
+      </if>
+      <if test="primarycoverage != null" >
+        primarycoverage = #{primarycoverage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workbase != null" >
+        workbase = #{workbase,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pilotdemonstration != null" >
+        pilotdemonstration = #{pilotdemonstration,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="conditionaladvantage != null" >
+        conditionaladvantage = #{conditionaladvantage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="assessmentindex != null" >
+        assessmentindex = #{assessmentindex,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="benefitanalysis != null" >
+        benefitanalysis = #{benefitanalysis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="budget != null" >
+        budget = #{budget,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="projectimplement != null" >
+        projectimplement = #{projectimplement,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="bearunit != null" >
+        bearunit = #{bearunit,jdbcType=VARCHAR},
+      </if>
+       <if test="partunit != null" >
+        partunit = #{partunit,jdbcType=VARCHAR},
+      </if>
+       <if test="personcharge != null" >
+        personcharge = #{personcharge,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cody.entity.science.ScienceBase" >
+    update t_science_base
+    set applycode = #{applycode,jdbcType=VARCHAR},
+      applyname = #{applyname,jdbcType=VARCHAR},
+      applytime = #{applytime,jdbcType=TIMESTAMP},
+      applicant = #{applicant,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      status_id = #{statusId,jdbcType=VARCHAR},
+      unit_id = #{unitId,jdbcType=VARCHAR},
+      process_id = #{processId,jdbcType=VARCHAR},
+      log_id = #{logId,jdbcType=VARCHAR},
+      reviewstatus_id = #{reviewstatusId,jdbcType=VARCHAR},
+      reviewcotent = #{reviewcotent,jdbcType=VARCHAR},
+      classify_id = #{classifyId,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updator_id = #{updatorId,jdbcType=BIGINT},
+      lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      delstatus = #{delstatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  	<select id="findToMonthDataCount" resultType="java.lang.Integer" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select count(*) count
+		from  t_science_base
+		where date_format(createtime, '%Y%m') = date_format(curdate(), '%Y%m') 
+	</select>
+	
+	<select id="findLastData" resultMap="BaseResultMap" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		select * from t_science_base  order by createtime desc limit 1;
+	</select>
+     
+     <!--  
+        SELECT applyname,createtime,DATE_ADD(createtime,INTERVAL 365 DAY) as createtimeinc 
+		FROM ${tablename} where unit_id=#{unitId,jdbcType=VARCHAR} order by createtime desc limit 1;
+     -->
+    <select id="selectByUnitId" resultMap="VoResultMap" parameterType="com.cody.common.core.CustomDatabaseHandle">
+		SELECT applyname,createtime,DATE_ADD(createtime,INTERVAL 365 DAY) as createtimeinc 
+		FROM  ${tablename}
+		<where>
+			<foreach collection="condition" item="item" index="key" separator="and">
+				${key}  #{item}
+       		</foreach>
+		</where>
+	    ORDER BY createtime desc limit 1;
+	</select>
+ 
+</mapper>
